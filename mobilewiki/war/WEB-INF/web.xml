@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+    <!-- filter -->
+    
+	<filter>
+		<filter-name>UrlParsingFilter</filter-name>
+		<filter-class>mobilewiki.UrlParsingFilter</filter-class>
+	</filter>
+
+    <!-- servlets -->
+    
+	<servlet>
+		<servlet-name>AppRootServlet</servlet-name>
+		<servlet-class>mobilewiki.AppRootServlet</servlet-class>
+	</servlet>
+    
+	<servlet>
+		<servlet-name>WikiServlet</servlet-name>
+		<servlet-class>mobilewiki.WikiServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>EditServlet</servlet-name>
+		<servlet-class>mobilewiki.EditServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>SaveServlet</servlet-name>
+		<servlet-class>mobilewiki.SaveServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>HelpServlet</servlet-name>
+		<servlet-class>mobilewiki.HelpServlet</servlet-class>
+	</servlet>
+
+    <!-- filter path -->
+	
+	<filter-mapping>
+		<filter-name>UrlParsingFilter</filter-name>
+		<url-pattern>/wiki/*</url-pattern>
+		<url-pattern>/edit/*</url-pattern>
+		<url-pattern>/save/*</url-pattern>
+	</filter-mapping>
+
+    <!-- servlet paths -->
+	
+	<servlet-mapping>
+		<servlet-name>AppRootServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>WikiServlet</servlet-name>
+		<url-pattern>/wiki/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>EditServlet</servlet-name>
+		<url-pattern>/edit/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>SaveServlet</servlet-name>
+		<url-pattern>/save/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>HelpServlet</servlet-name>
+		<url-pattern>/help</url-pattern>
+	</servlet-mapping>
+	
+    <!-- JSPs --> 
+
+    <servlet> 
+       <servlet-name>app-root-jsp</servlet-name> 
+       <jsp-file>/WEB-INF/jsp/app-root.jsp</jsp-file> 
+       <load-on-startup>1</load-on-startup> 
+    </servlet> 
+
+    <servlet> 
+       <servlet-name>wiki-jsp</servlet-name> 
+       <jsp-file>/WEB-INF/jsp/wiki.jsp</jsp-file> 
+       <load-on-startup>1</load-on-startup> 
+    </servlet> 
+
+    <servlet> 
+       <servlet-name>edit-jsp</servlet-name> 
+       <jsp-file>/WEB-INF/jsp/edit.jsp</jsp-file> 
+       <load-on-startup>1</load-on-startup> 
+    </servlet> 
+
+    <servlet> 
+       <servlet-name>help-jsp</servlet-name> 
+       <jsp-file>/WEB-INF/jsp/help.jsp</jsp-file> 
+       <load-on-startup>1</load-on-startup> 
+    </servlet> 
+
+</web-app>
