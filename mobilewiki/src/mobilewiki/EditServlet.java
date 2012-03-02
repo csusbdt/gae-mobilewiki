@@ -35,7 +35,8 @@ public class EditServlet extends HttpServlet
 		}
 		
 		String pageName = (String) req.getAttribute("pageName");
-		req.setAttribute("cancelUrl", "/wiki/" + pageOwner + "/" + pageName);
+		req.setAttribute("cancelUrl", "/wiki/" + pageOwner + "/" + pageName);		
+		req.setAttribute("saveUrl", "/save/" + pageOwner + "/" + pageName);
 		
 		String pageText = "Page text from the datastore.";
 		req.setAttribute("pageText", pageText);

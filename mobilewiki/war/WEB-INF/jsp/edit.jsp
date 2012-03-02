@@ -15,7 +15,7 @@
 <div data-role="page" id="edit">
 
 	<div data-role="header">
-      <a href="${cancelUrl}" data-role="button" data-icon="star" data-theme="a" data-rel="back" data-transition="slide">Save</a>
+      <a href="${saveUrl}" data-role="button" data-icon="star" data-theme="a" data-rel="back" data-transition="slide">Save</a>
       <a href="${cancelUrl}" data-role="button" data-icon="star" data-theme="a" data-rel="back" data-transition="slide">Cancel</a>         
       <h1>Edit: ${pageName}</h1>
 	</div>
