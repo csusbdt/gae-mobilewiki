@@ -21,7 +21,7 @@ public class WikiServlet extends HttpServlet
 	{
 		String pageOwner = (String) req.getAttribute("pageOwner");
 		String pageName = (String) req.getAttribute("pageName");
-		String pageText = "Page text from the datastore.";		
+		String pageText = WikiPage.getWikifiedText(pageOwner, pageName);		
 		req.setAttribute("pageText", pageText);
 
 		UserService userService = UserServiceFactory.getUserService();

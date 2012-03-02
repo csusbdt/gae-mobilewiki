@@ -26,7 +26,7 @@ public class UrlParsingFilter implements Filter
 	{
 		HttpServletRequest httpReq = (HttpServletRequest) req;
 		HttpServletResponse httpResp = (HttpServletResponse) resp;
-		
+
 		String pathInfo = httpReq.getPathInfo();
 		if (pathInfo == null)
 		{

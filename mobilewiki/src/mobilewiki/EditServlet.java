@@ -34,12 +34,18 @@ public class EditServlet extends HttpServlet
 			return;
 		}
 		
+		// Pass save and cancel urls to the jsp.
 		String pageName = (String) req.getAttribute("pageName");
 		req.setAttribute("cancelUrl", "/wiki/" + pageOwner + "/" + pageName);		
 		req.setAttribute("saveUrl", "/save/" + pageOwner + "/" + pageName);
-		
-		String pageText = "Page text from the datastore.";
+
+		// Pass the page text to the jsp.
+		String pageText = WikiPage.getText(pageOwner, pageName);
 		req.setAttribute("pageText", pageText);
+		
+		// Pass the csrf token to the JSP.
+		String csrfToken = WikiUser.getCsrfToken(pageOwner);
+		req.setAttribute("csrfToken", csrfToken);
 
 		RequestDispatcher jsp = req.getRequestDispatcher("/WEB-INF/jsp/edit.jsp");
 		jsp.forward(req, resp);

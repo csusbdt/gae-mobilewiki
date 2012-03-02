@@ -14,15 +14,16 @@
 <div data-role="page" id="edit">
 
 	<div data-role="header">
-      <a href="#" id="saveControl" data-role="button" data-icon="star" data-theme="a" data-rel="back" data-transition="slide">Save</a>
+      <a href="#" id="saveControl" data-role="button" data-icon="star" data-theme="a" data-transition="slide">Save</a>
       <a href="${cancelUrl}" data-role="button" data-icon="star" data-theme="a" data-rel="back" data-transition="slide">Cancel</a>         
       <h1>Edit: ${pageName}</h1>
 	</div>
 
 	<div data-role="content">
-      <form id="editForm" action="${saveUrl}" method="post">
+      <form id="editForm" action="${saveUrl}" method="post" data-ajax="false">
 		<textarea name="pageText">${pageText}</textarea>
-      </form>		
+		<input type="hidden" name="csrfToken" value="${csrfToken}" />
+      </form>
     </div>
 
 </div>
