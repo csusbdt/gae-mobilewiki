@@ -21,13 +21,11 @@ public class WikiServlet extends HttpServlet
 	{
 		String pageOwner = (String) req.getAttribute("pageOwner");
 		String pageName = (String) req.getAttribute("pageName");
-		String pageText = "Page text from the datastore.";
-		
+		String pageText = "Page text from the datastore.";		
 		req.setAttribute("pageText", pageText);
 
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-
 		if (user == null)
 		{
 			// User is not logged in.
@@ -36,6 +34,7 @@ public class WikiServlet extends HttpServlet
 		}
 		else
 		{
+			// User is logged in.
 			String logoutUrl = userService.createLogoutURL(req.getServletPath() + req.getPathInfo());
 			req.setAttribute("logoutUrl", logoutUrl);
 			String userName = user.getNickname();		

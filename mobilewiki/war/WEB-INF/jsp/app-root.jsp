@@ -15,9 +15,9 @@
 		<h1>GAE Mobile Wiki</h1>
 	</div>
 
-	<div data-role="content">	
-		<p>app root</p>		
-	</div>
+  <div data-role="content">
+    <a href="${loginUrl}" data-role="button" data-icon="star" data-theme="a" data-ajax="false">Login</a>
+  </div>
 
 </div>
 

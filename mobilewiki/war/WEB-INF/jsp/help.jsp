@@ -34,9 +34,5 @@
 	</div>
 </div>
 
-
-<div data-role="page" id="wiki">
-</div>
-
 </body>
 </html>
