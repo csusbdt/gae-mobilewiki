@@ -1,6 +1,7 @@
 package mobilewiki;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,10 @@ public class SaveServlet extends HttpServlet
 		String pageName = (String) req.getAttribute("pageName");
 		
 		String pageText = req.getParameter("pageText");
+
 		
+		Logger.getLogger("cse405").warning("pageText = " + pageText);
+
 		// Save the pageText into the datastore.
 		
 		resp.sendRedirect("/wiki/" + pageOwner + "/" + pageName);

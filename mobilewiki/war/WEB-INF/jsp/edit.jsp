@@ -9,19 +9,18 @@
   <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
 </head> 
-
-<body> 
+ <body> 
 
 <div data-role="page" id="edit">
 
 	<div data-role="header">
-      <a href="${saveUrl}" data-role="button" data-icon="star" data-theme="a" data-rel="back" data-transition="slide">Save</a>
+      <a href="#" id="saveControl" data-role="button" data-icon="star" data-theme="a" data-rel="back" data-transition="slide">Save</a>
       <a href="${cancelUrl}" data-role="button" data-icon="star" data-theme="a" data-rel="back" data-transition="slide">Cancel</a>         
       <h1>Edit: ${pageName}</h1>
 	</div>
 
 	<div data-role="content">
-      <form>
+      <form id="editForm" action="${saveUrl}" method="post">
 		<textarea name="pageText">${pageText}</textarea>
       </form>		
     </div>

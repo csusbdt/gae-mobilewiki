@@ -1,7 +1,6 @@
 package mobilewiki;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,8 +34,6 @@ public class UrlParsingFilter implements Filter
 			httpResp.sendError(300, ILLEGAL_REQUEST);
 			return;
 		}
-		
-		Logger.getLogger("cse405").warning("pathInfo = " + pathInfo);
 
 		// Make sure url has only digits, letters, space, underscore, dash, 
         // arobase, and period.
