@@ -2,6 +2,7 @@ package mobilewiki;
 
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -12,6 +13,8 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Text;
+import com.google.appengine.api.datastore.Transaction;
+
 
 public class WikiPage
 {	
@@ -55,6 +58,12 @@ public class WikiPage
 
 	public static void put(String userNickname, String pageName, String text) 
 	{
+		text = text.trim();
+		if (text.length() == 0)
+		{
+			delete(userNickname, pageName);
+			return;
+		}
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key wikiUserKey = KeyFactory.createKey(WikiUser.kind, userNickname);		
 		Entity entity = new Entity(kind, pageName, wikiUserKey);
@@ -67,12 +76,44 @@ public class WikiPage
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key wikiUserKey = KeyFactory.createKey(WikiUser.kind, userNickname);
 		Key wikiPageKey = new KeyFactory.Builder(wikiUserKey).addChild(kind, pageName).getKey();
-		datastore.delete(wikiPageKey);
-		// If user has no other pages, then delete user.
-		Query query = new Query(kind, wikiUserKey);
-		if (datastore.prepare(query).countEntities(withLimit(1)) == 0)
+		Query query = new Query(kind);
+		query.setAncestor(wikiUserKey);
+		Transaction txn = datastore.beginTransaction();
+		try
 		{
-			datastore.delete(wikiUserKey);
+			datastore.delete(wikiPageKey);
+			txn.commit();
+		} 
+		catch (Exception e)
+		{
+			Logger.getLogger("cse405").warning(e.getMessage());
 		}
+		finally 
+		{
+			if (txn.isActive()) 
+			{
+				txn.rollback();
+				return;
+			}
+	    }
+
+		// If user has no other pages, then delete user.
+		txn = datastore.beginTransaction();
+		try
+		{
+			if (datastore.prepare(txn, query).countEntities(withLimit(1)) == 0)
+			{
+				datastore.delete(wikiUserKey);
+			}
+			txn.commit();
+		} 
+		finally 
+		{
+			if (txn.isActive()) 
+			{
+				txn.rollback();
+			}
+	    }
+
 	}
 }
